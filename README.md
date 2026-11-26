@@ -1,6 +1,10 @@
 # M5Core2_HeartBIT
 M5Stack Core2 と BITalino HeartBIT（Bluetooth Classic / SPPモデル）を直接 Bluetooth 接続し、PC を介さずにリアルタイムで心電図（ECG）波形と心拍数（BPM）を表示する PlatformIO プロジェクトです。
 
+## 生成AIの利用について
+本プロジェクトのソースコードの実装、信号処理アルゴリズムの設計、およびドキュメント（README等）の作成には、生成AI（Gemini4 Neon）を活用しています。<br>
+生成されたコードについては、実機（M5Stack Core2 + BITalino HeartBIT）での動作確認および検証を行っています。
+
 ## 主な機能
 
 - **スタンドアロン動作**: M5Core2（Bluetooth マスター）から HeartBIT へ直接 SPP 接続し、100 Hz で ECG データを取得
@@ -36,7 +40,7 @@ Platformioが動作する最小構成です。
 ## セットアップ手順
 1. リポジトリのクローン
 ``` bash
-git clone
+git clone　https://github.com/YN1222124/M5Core2_HeartBIT.git
 ```
 2. HeartBIT の MAC アドレスとチャンネルを設定
 `src/main.cpp` の先頭を、お手元の HeartBIT の値に合わせて変更します。
@@ -64,8 +68,8 @@ PlatformIO でビルド・書き込みを実行します。`platformio.ini` で�
 ``` text
 BPM: 66.7 (RR: 900 ms, E: 142.5, Th: 58.2)
 ```
-`E`: 現在の R 波エネルギー値
-`Th`: 現在の検出しきい値
+`E`: 現在の R 波エネルギー値 <br>
+`Th`: 現在の検出しきい値 
 
 波形上の赤い丸（R 波検出マーカー）がノイズに誤反応する、または R 波を取りこぼす場合は、`src/main.cpp` 内の `threshold = max(30.0f, peakEnergy * 0.40f);` の係数（`0.40f`）を調整してください。
 
